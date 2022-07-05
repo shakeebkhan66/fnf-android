@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fnf_project/View/product_list.dart';
 import 'dart:convert';
-
 import 'package:http/http.dart';
-
 import '../Utils/shared_preference.dart';
+
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -42,7 +41,8 @@ class _SignInScreenState extends State<SignInScreen> {
         Constants.preferences!.setBool("loggedIn", true);
         Constants.preferences?.setString('Token', data['token']);
         Constants.preferences?.setInt('SubsidyPercentage', data['subsidy_percentage']);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProductListScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProductListScreen(
+        )));
 
       }else{
         print("Failed");

@@ -10,7 +10,8 @@ class Product {
       int? id, 
       String? name, 
       String? uom, 
-      int? weight, 
+      int? weight,
+      double? subsidy,
       int? price, 
       String? expiryDate,}){
     _id = id;

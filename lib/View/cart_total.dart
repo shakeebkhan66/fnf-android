@@ -30,7 +30,7 @@ class CartTotal extends StatelessWidget {
                   ),
                   Text(
                     "${controller.cartSubTotal}",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   )
                 ],
               ),
@@ -42,8 +42,9 @@ class CartTotal extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   Text(
-                    "${subsidyAmount}",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    // "${subsidyAmount}",
+                    controller.discountFeeFunction(),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   )
                 ],
               ),
@@ -55,8 +56,9 @@ class CartTotal extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   Text(
-                    "${totalBill}",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    // "${totalBill}",
+                    controller.getFinalTotal(),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   )
                 ],
               ),

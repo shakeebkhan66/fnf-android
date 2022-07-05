@@ -8,12 +8,12 @@ import '../Utils/shared_preference.dart';
 class CartController extends GetxController {
   // TODO Add a dictionary to store the products in the cart
   final _products = {}.obs;
+  var cartItems = <Product>[].obs;
   var mySubsidyAmount = {}.obs;
-  // var myTotalBill = {}.obs;
-  // var mySubsidyPercentage = {}.obs;
-  get products => _products;
+  var discountFee = {}.obs;
+  var totalAmount = {}.obs;
   var subsidy = Constants.preferences?.getInt('SubsidyPercentage').obs;
-  // Rx<double?> subsidyPercentage = (subsidy! / 100).obs as Rx<double?>;
+  get products => _products;
 
 
 
@@ -24,34 +24,50 @@ class CartController extends GetxController {
       * product.value).toList()
       .reduce((value, element) => value + element);
 
-  // TODO For Calculating Total Price of Products After Discount
-  get productTotal => _products.entries.map((product) => product.key.price
-      * product.value ).toList();
-  get cartTotal => _products.entries.map((product) => product.key.price
-      * product.value).toList()
-      .reduce((value, element,) => value + element);
-
-  // TODO Add Product in the Dictionary
-  void addProduct(Product product) {
-    if (_products.containsKey(product)) {
-      _products[product] += 1;
-    } else {
-      _products[product] = 1;
-    }
-    Get.snackbar(
-        "Product Added", "You have added the ${product.name} to the cart",
-        duration: Duration(milliseconds: 1000),
-        snackPosition: SnackPosition.BOTTOM
-    );
+  sumCart(){
+    return _products.entries.map((product) => product.key.price
+        * product.value);
   }
 
-  // TODO Remove Product From The Dictionary
-  void removeProduct(Product product){
-    if(_products.containsKey(product) && _products[product] == 1){
-      _products.removeWhere((key, value) => key == product);
-    }else{
-      _products[product] --;
-    }
+  discountFeeFunction() {
+    return discountFee = (sumCart() * subsidy)/100;
   }
 
-}
+    getFinalTotal() {
+      return sumCart() - discountFeeFunction();
+    }
+
+
+    // TODO For Calculating Total Price of Products After Discount
+    // get productTotal => _products.entries.map((product) => product.key.price
+    //     * product.value * subsidy);
+    // get cartTotal => _products.entries.map((product) => product.key.price
+    //     * product.value * subsidy).toList()
+    //     .reduce((value, element,) => value + element);
+
+    // TODO Add Product in the Dictionary
+    void addProduct(Product product) {
+      if (_products.containsKey(product)) {
+        _products[product] += 1;
+      } else {
+        _products[product] = 1;
+      }
+      Get.snackbar(
+          "Product Added", "You have added the ${product.name} to the cart",
+          duration: const Duration(milliseconds: 700),
+          snackPosition: SnackPosition.BOTTOM
+      );
+    }
+
+    // TODO Remove Product From The Dictionary
+    void removeProduct(Product product){
+      if(_products.containsKey(product) && _products[product] == 1){
+        _products.removeWhere((key, value) => key == product);
+      }else{
+        _products[product] --;
+      }
+    }
+
+
+  }
+

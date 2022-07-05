@@ -15,7 +15,7 @@ class CheckoutCatalog extends StatelessWidget {
         Obx(() => SizedBox(
       height: 500,
       child: ListView.builder(
-        itemCount: controller.products.length,
+        itemCount:controller.products.length,
         itemBuilder: (context, index){
           return CheckoutCatalogCard(
             controller: controller,
@@ -44,32 +44,29 @@ class CheckoutCatalogCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(width: 20,),
-            Expanded(
-              child: Text(products.name.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-            ),
-            IconButton(
-                onPressed: (){
-                  controller.removeProduct(products);
-                },
-                icon: Icon(Icons.remove_circle)
-            ),
-            Text('${quantity}'),
-            IconButton(
-                onPressed: (){
-                  controller.addProduct(products);
-                },
-                icon: Icon(Icons.add_circle)
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(width: 20,),
+          Expanded(
+            child: Text(products.name.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+          ),
+          IconButton(
+              onPressed: (){
+                controller.removeProduct(products);
+              },
+              icon: const Icon(Icons.remove_circle)
+          ),
+          Text('${quantity}'),
+          IconButton(
+              onPressed: (){
+                controller.addProduct(products);
+              },
+              icon: const Icon(Icons.add_circle)
+          ),
+        ],
       ),
     );
   }
