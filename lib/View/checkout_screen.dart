@@ -42,13 +42,6 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double subsidyPercentage;
-    subsidyPercentage = (controller.subsidy! / 100)! as double;
-    // controller.mySubsidyPercentage = subsidyPercentage;
-    var subsidyAmount = controller.cartSubTotal * subsidyPercentage;
-    // controller.mySubsidyAmount = subsidyAmount;
-    var totalBill = controller.cartSubTotal - subsidyAmount;
-
     return WillPopScope(
       onWillPop: () => _onWillPop(context),
       child: Scaffold(
@@ -69,65 +62,66 @@ class CheckoutScreen extends StatelessWidget {
           ),
         ),
         body: SafeArea(
-          child: Column(
+          child: ListView(
             children: [
               CheckoutCatalog(),
-              Expanded(
-                child: Obx(() =>
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 75),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "SubTotal",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                          ),
-                          Text(
-                            "${controller.cartSubTotal}",
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Discount",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                          ),
-                          Text(
-                            "${subsidyAmount}",
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Total",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                          ),
-                          Text(
-                            "${totalBill}",
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 25.0),
-                      MaterialButton(
-                        onPressed: (){},
-                        color: Colors.blue.shade500,
-                        child: const Text("Confirm Order", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                      )
-                    ],
-                  ),
-                ),
-          ),
-              )
+              CartTotal(),
+          //     Expanded(
+          //       child: Obx(() =>
+          //       Container(
+          //         padding: const EdgeInsets.symmetric(horizontal: 75),
+          //         child: Column(
+          //           children: [
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: [
+          //                 const Text(
+          //                   "SubTotal",
+          //                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          //                 ),
+          //                 Text(
+          //                   controller.cartSubTotal.toString(),
+          //                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          //                 )
+          //               ],
+          //             ),
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: [
+          //                 const Text(
+          //                   "Discount",
+          //                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          //                 ),
+          //                 Text(
+          //                   "${controller.cartSubTotal * 0.25}",
+          //                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          //                 )
+          //               ],
+          //             ),
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: [
+          //                 const Text(
+          //                   "Total",
+          //                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          //                 ),
+          //                 Text(
+          //                   "${controller.cartSubTotal - controller.cartSubTotal * 0.25}",
+          //                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          //                 )
+          //               ],
+          //             ),
+          //             const SizedBox(height: 25.0),
+          //             MaterialButton(
+          //               onPressed: (){},
+          //               color: Colors.blue.shade500,
+          //               child: const Text("Confirm Order", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+          //             )
+          //           ],
+          //         ),
+          //       ),
+          // ),
+          //     )
             ],
           ),
         ),

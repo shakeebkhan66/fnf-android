@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
@@ -9,9 +10,6 @@ class CartController extends GetxController {
   // TODO Add a dictionary to store the products in the cart
   final _products = {}.obs;
   var cartItems = <Product>[].obs;
-  var mySubsidyAmount = {}.obs;
-  var discountFee = {}.obs;
-  var totalAmount = {}.obs;
   var subsidy = Constants.preferences?.getInt('SubsidyPercentage').obs;
   get products => _products;
 
@@ -24,48 +22,66 @@ class CartController extends GetxController {
       * product.value).toList()
       .reduce((value, element) => value + element);
 
+
+  var subTotal = 0.obs;
+  var subsidyAmount = 0.0.obs;
+  var totalAmount = 0.0.obs;
+
+
   sumCart(){
-    return _products.entries.map((product) => product.key.price
-        * product.value);
+    subTotal.value = cartSubTotal;
+    if(_products.isNotEmpty){
+      return subTotal.value;
+    }else{
+      return 0;
+    }
   }
 
   discountFeeFunction() {
-    return discountFee = (sumCart() * subsidy)/100;
+    return subsidyAmount.value = sumCart() * 0.25;
   }
 
     getFinalTotal() {
-      return sumCart() - discountFeeFunction();
+     return totalAmount.value = sumCart() - discountFeeFunction();
     }
 
-
-    // TODO For Calculating Total Price of Products After Discount
-    // get productTotal => _products.entries.map((product) => product.key.price
-    //     * product.value * subsidy);
-    // get cartTotal => _products.entries.map((product) => product.key.price
-    //     * product.value * subsidy).toList()
-    //     .reduce((value, element,) => value + element);
-
     // TODO Add Product in the Dictionary
-    void addProduct(Product product) {
+    void addProduct(Product product, context) {
       if (_products.containsKey(product)) {
+        cartItems.add(product);
         _products[product] += 1;
       } else {
         _products[product] = 1;
       }
-      Get.snackbar(
-          "Product Added", "You have added the ${product.name} to the cart",
-          duration: const Duration(milliseconds: 700),
-          snackPosition: SnackPosition.BOTTOM
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text("You have add ${product.name} to cart" ),
+            dismissDirection: DismissDirection.horizontal,
+            duration: Duration(milliseconds: 600),
+            backgroundColor: Colors.blue.shade500,
+          )
       );
     }
 
+
     // TODO Remove Product From The Dictionary
-    void removeProduct(Product product){
+    void removeProduct(Product product, context){
       if(_products.containsKey(product) && _products[product] == 1){
         _products.removeWhere((key, value) => key == product);
       }else{
         _products[product] --;
       }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("You have removed ${product.name} to cart" ),
+            dismissDirection: DismissDirection.horizontal,
+            duration: Duration(milliseconds: 600),
+            backgroundColor: Colors.blue.shade500,
+          )
+      );
+
     }
 
 

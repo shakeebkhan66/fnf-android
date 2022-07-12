@@ -30,7 +30,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   List<Product> productList = [];
   Future<List<Product>> getProductsList() async{
     final response = await http.get(
-      Uri.parse('http://192.168.1.19:8000/api/products/'),
+      Uri.parse('http://192.168.10.7:8844/api/products/'),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json',
@@ -160,7 +160,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                     const SizedBox(width: 180,),
                                     MaterialButton(
                                       onPressed: (){
-                                        cartController.addProduct(productList[index]);
+                                        cartController.addProduct(productList[index], context);
                                       },
                                       color: Colors.blue.shade500,
                                       child: const Text("Add to Cart", style: TextStyle(color: Colors.white),),

@@ -13,19 +13,20 @@ class CheckoutCatalog extends StatelessWidget {
     return Column(
       children: [
         Obx(() => SizedBox(
-      height: 500,
-      child: ListView.builder(
-        itemCount:controller.products.length,
-        itemBuilder: (context, index){
-          return CheckoutCatalogCard(
-            controller: controller,
-            products: controller.products.keys.toList()[index],
-            quantity: controller.products.values.toList()[index],
-            index: index,
-          );
-        },
-      ),
-    )),
+          height: 400,
+          child: ListView.builder(
+            itemCount:controller.products.length,
+            itemBuilder: (context, index){
+              return CheckoutCatalogCard(
+                controller: controller,
+                products: controller.products.keys.toList()[index],
+                quantity: controller.products.values.toList()[index],
+                index: index,
+              );
+            },
+          ),
+        ),
+        ),
       ],
     );
   }
@@ -55,14 +56,14 @@ class CheckoutCatalogCard extends StatelessWidget {
           ),
           IconButton(
               onPressed: (){
-                controller.removeProduct(products);
+                controller.removeProduct(products, context);
               },
               icon: const Icon(Icons.remove_circle)
           ),
           Text('${quantity}'),
           IconButton(
               onPressed: (){
-                controller.addProduct(products);
+                controller.addProduct(products, context);
               },
               icon: const Icon(Icons.add_circle)
           ),

@@ -23,7 +23,7 @@ class _SignInScreenState extends State<SignInScreen> {
   login(String username, password)async{
     try{
       var response = await post(
-          Uri.parse('http://192.168.1.19:8000/api/login/'),
+          Uri.parse('http://192.168.10.7:8844/api/login/'),
           body: {
             "username": username,
             "password": password,

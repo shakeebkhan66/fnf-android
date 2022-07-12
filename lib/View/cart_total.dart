@@ -10,27 +10,36 @@ class CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double subsidyPercentage;
-    subsidyPercentage = (controller.subsidy! / 100)! as double;
-    // controller.mySubsidyPercentage = subsidyPercentage;
-    var subsidyAmount = controller.cartSubTotal * subsidyPercentage;
-    // controller.mySubsidyAmount = subsidyAmount;
-    var totalBill = controller.cartSubTotal - subsidyAmount;
+    // double subsidyPercentage;
+    // subsidyPercentage = (controller.subsidy! / 100)! as double;
+    // // controller.mySubsidyPercentage = subsidyPercentage;
+    // var subsidyAmount = controller.cartSubTotal * subsidyPercentage;
+    // // controller.mySubsidyAmount = subsidyAmount;
+    // var totalBill = controller.cartSubTotal - subsidyAmount;
     return Obx(() =>
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 75),
           child: Column(
             children: [
+              const Center(
+                  child:
+                  Text(
+                    "PRODUCTS AMOUNT",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900, fontSize: 19
+                    ),
+                  )),
+              const SizedBox(height: 25,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     "SubTotal",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
                   ),
                   Text(
                     "${controller.cartSubTotal}",
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   )
                 ],
               ),
@@ -39,13 +48,12 @@ class CartTotal extends StatelessWidget {
                 children: [
                   const Text(
                     "Discount",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
                   ),
-                  Text(
-                    // "${subsidyAmount}",
-                    controller.discountFeeFunction(),
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  )
+                  Obx(() =>  Text(
+                    "${controller.discountFeeFunction()}",
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )),
                 ],
               ),
               Row(
@@ -53,12 +61,11 @@ class CartTotal extends StatelessWidget {
                 children: [
                   const Text(
                     "Total",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
                   ),
                   Text(
-                    // "${totalBill}",
-                    controller.getFinalTotal(),
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    "${controller.getFinalTotal()}",
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   )
                 ],
               ),
